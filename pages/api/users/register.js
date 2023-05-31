@@ -19,7 +19,6 @@ const handler = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     // create hash
     newUser.password = await bcrypt.hash(newUser.password, salt);
-    newUser.confirmPassword = await bcrypt.hash(newUser.confirmPassword, salt);
     await newUser.save();
     res.status(200).json(newUser);
     // set password to hashed

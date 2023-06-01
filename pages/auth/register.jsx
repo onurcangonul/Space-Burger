@@ -4,16 +4,25 @@ import { registerSchena } from "@/schema/register";
 import Input from "@/components/form/Input";
 import Title from "@/components/ui/Title";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
   const onSubmit = async (values, actions) => {
     try {
      const res = await axios.post(
        `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
        values
-     );
+      );
+      if (res.status === 200) {
+        toast.success("User created successfully")
+      } 
+      
     } catch (err) {
+       toast.error(err.response.data.message);
       console.log(err);
     }
+    actions.resetForm();
+
   };
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =

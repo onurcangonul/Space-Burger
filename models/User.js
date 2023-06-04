@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema(
         job: {
             type: String
         },
+        bio: {
+            type: String,
+        },
         password: {
             type: String,
             required: true
@@ -30,6 +33,7 @@ const UserSchema = new mongoose.Schema(
             type: String,
             default: null
         },
+       
     },
     {timestamps: true}
 )

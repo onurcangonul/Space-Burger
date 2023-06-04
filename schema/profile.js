@@ -9,7 +9,7 @@ export const profileSchena = Yup.object({
     email: Yup.string()
         .required("Email is required").email("Email is invalid"),
     address: Yup.string()
-        .required("Address is required").email("Address is invalid"),
+        .required("Address is required"),
     job: Yup.string()
         .required("Job is required"),
     bio: Yup.string()

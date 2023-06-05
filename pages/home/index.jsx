@@ -5,17 +5,17 @@ import About from '@/components/ui/About'
 import Reservation from '@/components/ui/Reservation'
 import Customers from '@/components/customers/Customers'
 import Footer from '@/components/layout/Footer'
-const Home = () => {
+const Home = ({ categoryList }) => {
   return (
     <>
       <Carousel />
       <Campaings />
-      <MenuWrapper />
+      <MenuWrapper categoryList={categoryList} />
       <About />
       <Reservation />
       <Customers />
     </>
-  )
+  );
 }
 
 export default Home

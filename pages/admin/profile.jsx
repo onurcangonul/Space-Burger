@@ -6,25 +6,27 @@ import Category from "@/components/admin/Category";
 import AdminFooter from "@/components/admin/Footer";
 import axios from "axios";
 import { useRouter } from "next/router";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddProduct from "@/components/admin/AddProduct";
 const AdminProfile = () => {
   const [tabs, setTabs] = useState(0);
-  const { push } = useRouter()
-  
+  const [isProductModal, setIsProductModal] = useState(false);
+  const { push } = useRouter();
+
   const closeAdminAccount = async () => {
     try {
       if (confirm("Are You sure want to close your Admin Account ?")) {
-        const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/admin`)
+        const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/admin`);
         if (res.status === 200) {
-          push("/admin")
-          toast.success("Account Closed")
+          push("/admin");
+          toast.success("Account Closed");
         }
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div className="flex px-10 min-h-[calc(100vh_-_433px)]  lg:flex-row flex-col  mt-4">
@@ -96,6 +98,10 @@ const AdminProfile = () => {
       {tabs === 1 && <Order />}
       {tabs === 2 && <Category />}
       {tabs === 3 && <AdminFooter />}
+      {isProductModal && <AddProduct setIsProductModal={setIsProductModal} />}
+      <button className="btn-primary w-12 h-12 !p-0 text-4xl absolute bottom-14 right-10 " onClick={()=> setIsProductModal(true)}>
+        +
+      </button>
     </div>
   );
 };

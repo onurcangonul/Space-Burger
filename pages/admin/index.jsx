@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
-
 const AdminLogin = (props) => {
 const { push } = useRouter()    
   const onSubmit = async (values, actions) => {

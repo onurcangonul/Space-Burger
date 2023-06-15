@@ -49,7 +49,7 @@ const Order = () => {
                 <span>Preparing</span>
               </td>
               <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <buton className="btn-primary !bg-success">Next Stage</buton>
+                <button className="btn-primary !bg-success">Next Stage</button>
               </td>
             </tr>
           </tbody>

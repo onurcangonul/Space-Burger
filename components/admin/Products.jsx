@@ -45,7 +45,7 @@ import Image from 'next/image';
                    10
                  </td>
                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  <buton className="btn-primary !bg-danger">Delete</buton>
+                  <button className="btn-primary !bg-danger">Delete</button>
                  </td>
                </tr>
              </tbody>

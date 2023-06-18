@@ -3,7 +3,7 @@ import Image from 'next/image'
 import {FaShoppingBasket,} from "react-icons/fa"
 import Link from 'next/link'
 
- const MenuItem = () => {
+ const MenuItem = ({product}) => {
   return (
     <div className="bg-secondary rounded-3xl">
       <div
@@ -13,8 +13,8 @@ import Link from 'next/link'
         <Link href="/product">
           <div className="relative w-36 h-36 hover:scale-110 transition-all ">
             <Image
-              src="/images/pizza-1.png"
-              alt="burger-menu"
+              src={product.image}
+              alt={product.title}
               fill
               style={{ objectFit: "cover" }}
             />
@@ -22,13 +22,12 @@ import Link from 'next/link'
         </Link>
       </div>
       <div className="p-[25px] text-white">
-        <h4 className="text-xl font-semibold">Delicious Pizza</h4>
+        <h4 className="text-xl font-semibold">{product.title}</h4>
         <p className="text-[14px] pt-1">
-          Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit,
-          magnam voluptatem repellendus sed eaque
+         {product.desc}
         </p>
         <div className="flex justify-between items-center mt-4">
-          <span>$20</span>
+          <span>$ {product.prices[0]}</span>
           <button className="btn btn-primary w-10 h-10 rounded-full !p-0 grid place-content-center">
             <FaShoppingBasket />
           </button>

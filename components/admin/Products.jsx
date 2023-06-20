@@ -43,7 +43,7 @@ const Products = () => {
      return (
        <div className="lg:p-8 flex-1 lg:mt-0 mt-5">
          <Title addClass="text-[40px]">Products</Title>
-         <div className="md:min-h-[calc(100vh_-_433px)] overflow-x-auto w-full mt-5">
+         <div className="md:min-h-[calc(100vh_-_433px)] overflow-x-auto max-h-[400px] w-full mt-5">
            <table className="w-full text-sm text-center text-gray-500 ">
              <thead className="text-xs text-gray-400 uppercase bg-gray-700 min-w-[1000px] ">
                <tr>

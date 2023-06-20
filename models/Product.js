@@ -28,7 +28,7 @@ const ProductSchema = new mongoose.Schema(
             type: [
                 {
                     text: {type: String },
-                    price:{type:Number},
+                    price:{type: Number},
                 }
             ]
         }

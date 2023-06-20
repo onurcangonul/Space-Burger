@@ -28,10 +28,9 @@ const AddProduct = ({ setIsProductModal }) => {
     }
     getProducts()
 },[])
-console.log(categories)
   const handleExtra = (e) => {
     if (extra) {
-      if (extra.text && extra.prices) {
+      if (extra.text && extra.price) {
         setExtraOptions((prev) => [...prev, extra]);
     }
   }
@@ -201,7 +200,7 @@ console.log(categories)
                   type="number"
                   className="border-b-2 p-1 pl-0 text-sm px-1 outline-none w-36"
                   placeholder="price"
-                  name="prices"
+                  name="price"
                   onChange={(e) =>
                     setExtra({ ...extra, [e.target.name]: e.target.value })
                   }

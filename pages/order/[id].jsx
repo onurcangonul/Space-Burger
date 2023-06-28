@@ -1,6 +1,8 @@
+import axios from "axios";
 import Image from "next/image";
 
-const Order = () => {
+const Order = ({ order }) => {
+  console.log(order)
   return (
     <div className="overflow-x-auto">
       <div className="min-h-[calc(100vh_-_433px)] flex  justify-center items-center flex-col p-10  min-w-[1000px]">
@@ -25,16 +27,16 @@ const Order = () => {
             <tbody>
               <tr className="transition-all bg-secondary border-gray-700 hover:bg-primary ">
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center">
-                  6310234f9...
+                  {order._id.substring(0, 5)}...
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  Onurcan Gönül
+                  {order?.customer}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  İstanbul
+                  {order?.address}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  $18
+                  ${order?.total}
                 </td>
               </tr>
             </tbody>
@@ -87,4 +89,13 @@ const Order = () => {
   );
 };
 
+export const getServerSideProps = async ({ params }) => {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders/${params.id}`)
+  return {
+    props: {
+      order: res.data ? res.data : null
+    }
+  }
+  
+}
 export default Order;

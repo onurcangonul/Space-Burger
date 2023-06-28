@@ -42,7 +42,13 @@ const Index = ({ food }) => {
   return (
     <div className="flex items-center md:h-[calc(100vh_-_88px)] gap-5 py-20 flex-wrap ">
       <div className="relative md:flex-1 md:w-[80%] md:h-[80%] w-44 h-44 mx-auto">
-        <Image src={food?.image} alt="" fill style={{ objectFit: "contain" }} />
+        <Image
+          src={food?.image}
+          alt=""
+          fill
+          style={{ objectFit: "contain" }}
+          priority
+        />
       </div>
       <div className="md:flex-1 md:text-start text-center">
         <Title addClass="text-6xl">{food.title}</Title>
@@ -64,6 +70,7 @@ const Index = ({ food }) => {
                     alt=""
                     fill
                     style={{ objectFit: "contain" }}
+                    priority
                   />
                   <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium">
                     Small
@@ -78,6 +85,7 @@ const Index = ({ food }) => {
                     alt=""
                     fill
                     style={{ objectFit: "contain" }}
+                    priority
                   />
                   <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium">
                     Medium
@@ -92,6 +100,7 @@ const Index = ({ food }) => {
                     alt=""
                     fill
                     style={{ objectFit: "contain" }}
+                    priority
                   />
                   <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium">
                     Large
@@ -103,7 +112,7 @@ const Index = ({ food }) => {
         </div>
         <div className="flex gap-x-4 my-6 md:justify-start justify-center">
           {extraItems.map((item) => (
-            <label key={item.id} className="flex items-center gap-x-2">
+            <label key={item._id} className="flex items-center gap-x-2">
               <input
                 type="checkbox"
                 className="w-5 h-5 accent-primary"

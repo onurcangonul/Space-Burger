@@ -1,10 +1,49 @@
 import Title from "@/components/ui/Title";
 import Image from "next/image";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { reset } from "@/redux/cartSlice";
-const Card = () => {
-const cart = useSelector((state)=> state.cart)
-const dispatch = useDispatch()
+import axios from "axios";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+const Card = ({ userList }) => {
+  const { data: session } = useSession();
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const user = userList?.find((user) => user.email === session?.user?.email);
+  const newOrder = {
+    customer: user?.fullName,
+    address: user?.address ? user?.address : "No Address",
+    total: cart.total,
+    method: 0,
+  };
+
+   const createOrder = async () => {
+     try {
+       if (session) {
+         if (confirm("Are you sure to order?")) {
+           const res = await axios.post(
+             `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+             newOrder
+           );
+           if (res.status === 201) {
+             router.push(`/order/${res.data._id}`);
+             dispatch(reset());
+             toast.success("Order created successfully", {
+               autoClose: 1000,
+             });
+           }
+         }
+       } else {
+         toast.error("Please login first.", {
+           autoClose: 1000,
+         });
+       }
+     } catch (err) {
+       console.log(err);
+     }
+   };
   return (
     <div className="min-h-[calc(100vh_-_433px)]">
       <div className="flex justify-between items-center md:flex-row flex-col">
@@ -32,7 +71,7 @@ const dispatch = useDispatch()
             <tbody>
               {cart.products.map((product) => (
                 <tr
-                  key={product.id}
+                  key={product._id}
                   className=" bg-secondary border-gray-700 hover:bg-primary transition-all"
                 >
                   <td
@@ -76,10 +115,13 @@ const dispatch = useDispatch()
           </div>
 
           <div className="flex flex-col">
-            <button className="btn-primary mt-4 md:w-auto w-52">
+            <button className="btn-primary mt-4 md:w-auto w-52" onClick={createOrder}>
               Checkout Now
             </button>
-            <button className="btn-primary !bg-danger mt-4 md:w-auto w-52" onClick={()=> dispatch(reset())}>
+            <button
+              className="btn-primary !bg-danger mt-4 md:w-auto w-52"
+              onClick={() => dispatch(reset())}
+            >
               Clear Cart
             </button>
           </div>
@@ -90,3 +132,13 @@ const dispatch = useDispatch()
 };
 
 export default Card;
+
+export const getServerSideProps = async () => {
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+
+  return {
+    props: {
+      userList: res.data ? res.data : [],
+    },
+  };
+};

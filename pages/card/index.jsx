@@ -17,6 +17,7 @@ const Card = ({ userList }) => {
     address: user?.address ? user?.address : "No Address",
     total: cart.total,
     method: 0,
+    
   };
 
    const createOrder = async () => {
@@ -69,9 +70,9 @@ const Card = ({ userList }) => {
               </tr>
             </thead>
             <tbody>
-              {cart.products.map((product) => (
+              {cart.products.map((product, index) => (
                 <tr
-                  key={product._id}
+                  key={index}
                   className=" bg-secondary border-gray-700 hover:bg-primary transition-all"
                 >
                   <td
@@ -79,7 +80,7 @@ const Card = ({ userList }) => {
                  hover:text-white flex items-center gap-x-1 justify-center"
                   >
                     <Image
-                      src="/images/f1.png"
+                      src={product.image}
                       alt="product-card-image"
                       width={50}
                       height={50}
@@ -115,7 +116,10 @@ const Card = ({ userList }) => {
           </div>
 
           <div className="flex flex-col">
-            <button className="btn-primary mt-4 md:w-auto w-52" onClick={createOrder}>
+            <button
+              className="btn-primary mt-4 md:w-auto w-52"
+              onClick={createOrder}
+            >
               Checkout Now
             </button>
             <button

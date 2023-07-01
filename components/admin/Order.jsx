@@ -18,7 +18,6 @@ const Order = () => {
     };
     getOrders();
   }, []);
-  console.log(orders);
   const handleStatus = async (id) => {
     const item = orders.find((order) => order._id === id);
     const currentStatus = item.status;

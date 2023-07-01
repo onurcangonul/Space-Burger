@@ -1,6 +1,44 @@
-import Title from '../ui/Title';
+import Title from "../ui/Title";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useSession } from "next-auth/react";
+useSession;
+const Order = () => {
+  const [orders, setOrders] = useState([]);
+  const [curretUsers, setCurretUsers] = useState([]);
+  const status = ["Preparing", "On the way", "Delivered"];
+  const { data: session } = useSession();
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/orders`
+        );
+        setOrders(
+          res.data.filter((order) => order.customer === curretUsers?.fullName)
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getOrders();
+  }, [curretUsers]);
 
- const Order = () => {
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`)
+        setCurretUsers(
+          res.data.filter((user) => user.email === session.user.email)[0]
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getUsers()
+},[])
+
+console.log(orders);
   return (
     <form className="lg:p-8 flex-1 lg:mt-0 mt-5 ">
       <Title addClass="text-[40px] lg:text-left text-center">Password</Title>
@@ -9,7 +47,7 @@ import Title from '../ui/Title';
           <thead className="text-xs text-gray-400 uppercase bg-gray-700 min-w-[1000px] ">
             <tr>
               <th scope="col" className="py-3 px-6">
-                ID
+                Customer
               </th>
               <th scope="col" className="py-3 px-6">
                 Address
@@ -26,30 +64,35 @@ import Title from '../ui/Title';
             </tr>
           </thead>
           <tbody>
-            <tr className=" bg-secondary border-gray-700 hover:bg-primary transition-all">
-              <td
-                className="py-4 px-6 font-medium whitespace-nowrap
-                 hover:text-white flex items-center gap-x-1 justify-center"
+            {orders.map((order) => (
+              <tr
+                key={order?._id}
+                className=" bg-secondary border-gray-700 hover:bg-primary transition-all"
               >
-                <span>23428..</span>
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                <span>İstanbul</span>
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                27.05.2023
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                1
-              </td>
-              <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                Preparing
-              </td>
-            </tr>
+                <td
+                  className="py-4 px-6 font-medium whitespace-nowrap
+                 hover:text-white flex items-center gap-x-1 justify-center"
+                >
+                  <span>{order.customer}</span>
+                </td>
+                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                  <span>İstanbul</span>
+                </td>
+                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                  {order.address}
+                </td>
+                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                  {order.createdAt}
+                </td>
+                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                  <span>{status[order?.status]}</span>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </form>
   );
-}
-export default Order
+};
+export default Order;

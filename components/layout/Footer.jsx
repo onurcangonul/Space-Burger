@@ -1,80 +1,76 @@
 import React from "react";
 import Title from "../ui/Title";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Footer = () => {
+  const [footer, setFooter] = useState([]);
+  const { location, desc, email, phoneNumber, openingHours, socialMedia } = footer
+  
+  useEffect(() => {
+    const getFooter = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/footer`
+        );
+        setFooter(res.data[0]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFooter();
+  }, []);
+
   return (
     <div className="bg-secondary text-white">
       <div className="container mx-auto pt-16 pb-6">
-        <div className="flex md:justify-between justify-center text-center
-        flex-wrap md:gap-y-0 gap-y-6">
+        <div
+          className="flex md:justify-between justify-center text-center
+        flex-wrap md:gap-y-0 gap-y-6"
+        >
           <div className="md:flex-1">
             <Title addClass="text-[30px]">Contact Us</Title>
             <div className="flex flex-col gap-y-2 mt-3">
-              <div>
+              <a href={location} target="_blank">
                 <i className="fas fa-map-marker-alt"></i>
                 <span className="inline-block ml-2">Location</span>
-              </div>
-              <div>
+              </a>
+              <a href={`tel:${phoneNumber}`}>
                 <i className="fas fa-phone-alt"></i>
                 <span className="inline-block ml-2">
-                  Phone +90 0555 555 55 55
+                  Phone +90 {phoneNumber}
                 </span>
-              </div>
-              <div>
+              </a>
+              <a href={`mailto:${email}`}>
                 <i className="far fa-envelope"></i>
-                <span className="inline-block ml-2">burger@burger.com</span>
-              </div>
+                <span className="inline-block ml-2">{email}</span>
+              </a>
             </div>
           </div>
           <div className="md:flex-1">
             <Title addClass="text-[38px]">Feane</Title>
-            <p className="mt-3">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Voluptatibus inventore vitae saepe ex tenetur debitis quaerat
-              minima temporibus perspiciatis sequi. Sit vitae non nemo pariatur
-              sequi sed ab illum exercitationem?
-            </p>
+            <p className="mt-3">{desc}</p>
             <div className="flex items-center justify-center mt-5 gap-x-2  ">
-              <a
-                href="#"
-                className="w-8 h-8 grid place-content-center hover:text-primary"
-              >
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 grid place-content-center hover:text-primary"
-              >
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 grid place-content-center hover:text-primary"
-              >
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 grid place-content-center hover:text-primary"
-              >
-                <i className="fab fa-youtube"></i>
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 grid place-content-center hover:text-primary"
-              >
-                <i className="fab fa-linkedin-in"></i>
-              </a>
+              {socialMedia?.map((social) => (
+                <a
+                  key={social._id}
+                  href={social.link}
+                  target="_blank"
+                  className="w-8 h-8 grid place-content-center hover:text-primary"
+                >
+                  <i className={social.icon}></i>
+                </a>
+              ))}
             </div>
           </div>
           <div className="md:flex-1">
             <Title addClass="text-[30px]">Opening Hours</Title>
             <div className="flex flex-col gap-y-2 mt-3">
               <div>
-                <span className="inline-block ml-2">Everyday</span>
+                <span className="inline-block ml-2">{openingHours?.day}</span>
               </div>
               <div>
-                <span className="inline-block ml-2">10.00 AM - 10.00 PM</span>
+                <span className="inline-block ml-2">{openingHours?.hour}</span>
               </div>
             </div>
           </div>

@@ -4,6 +4,8 @@ import MenuItem from "./MenuItem";
 const MenuWrapper = ({ categoryList, productList }) => {
   const [active, setActive] = useState(0);
   const [filter, setFilter] = useState([]);
+  const [productLimit, setProductLimit] = useState(3);
+
   useEffect(() => {
     setFilter(
       productList.filter(
@@ -26,7 +28,10 @@ const MenuWrapper = ({ categoryList, productList }) => {
                 className={`px-6 py-2 rounded-3xl ${
                   index === active && "bg-secondary text-white text-xs"
                 }`}
-                onClick={() => setActive(index)}
+                onClick={() => {
+                  setActive(index);
+                  setProductLimit(3)
+                }}
               >
                 {category.title}
               </button>
@@ -38,9 +43,12 @@ const MenuWrapper = ({ categoryList, productList }) => {
           sm:grid-cols-2 grid-cols-1 gap-4 min-h-[400px]"
       >
         {filter.length > 0 &&
-          filter.map((product) => (
-            <MenuItem key={product._id} product={product} />
-          ))}
+          filter
+            .slice(0, productLimit)
+            .map((product) => <MenuItem key={product._id} product={product} />)}
+      </div>
+      <div className="flex items-center justify-center mt-8">
+        <button className="btn-primary" onClick={() => setProductLimit(productLimit + 3)}>View More</button>
       </div>
     </div>
   );

@@ -11,7 +11,10 @@ const Index = ({ food }) => {
   const [size, setSize] = useState(0);
   const [extraItems, setExtraItems] = useState(food?.extraOptions);
   const [extras, setExtras] = useState([]);
+
   const cart = useSelector((state) => state.cart);
+  const findCart = cart.products.find((item) => item._id === food._id)
+
   const dispatch = useDispatch();
   const handleSize = (sizeIndex) => {
     const difference = prices[sizeIndex] - prices[size];
@@ -122,7 +125,11 @@ const Index = ({ food }) => {
             </label>
           ))}
         </div>
-        <button className="btn-primary" onClick={handleClick}>
+        <button
+          className="btn-primary"
+          onClick={handleClick}
+          disabled={findCart}
+        >
           Add To Card
         </button>
       </div>

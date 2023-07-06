@@ -3,6 +3,7 @@ import Input from "../form/Input";
 import { profileSchena } from "@/schema/profile";
 import { useFormik } from "formik";
 import axios from "axios";
+import { toast } from "react-toastify";
 const Account = ({user}) => {
   const onSubmit = async (values, actions) => {
     try {
@@ -10,10 +11,12 @@ const Account = ({user}) => {
         `${process.env.NEXT_PUBLIC_API_URL}/users/${user._id}`,
         values
       );
+      if (res.status === 200) {
+        toast.success("Update Successful");
+      }
     } catch (err) {
       console.log(err)
     }
-    actions.resetForm();
   };
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
     useFormik({

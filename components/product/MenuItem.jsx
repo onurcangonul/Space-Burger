@@ -1,9 +1,25 @@
-import React from 'react'
-import Image from 'next/image'
-import {FaShoppingBasket,} from "react-icons/fa"
-import Link from 'next/link'
+import React from "react";
+import Image from "next/image";
+import { FaShoppingBasket } from "react-icons/fa";
+import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct } from "@/redux/cartSlice";
+addProduct;
+const MenuItem = ({ product }) => {
+  const cart = useSelector((state) => state.cart);
+  const findCart = cart.products.find((item) => item._id === product._id);
+  const dispatch = useDispatch();
 
- const MenuItem = ({product}) => {
+  const handleClick = () => {
+    dispatch(
+      addProduct({
+        ...product,
+        extras: [{ text: "empty" }],
+        price: product.prices[0],
+        quantity: 1,
+      })
+    );
+  };
   return (
     <div className="bg-secondary rounded-3xl">
       <div
@@ -23,17 +39,19 @@ import Link from 'next/link'
       </div>
       <div className="p-[25px] text-white">
         <h4 className="text-xl font-semibold">{product.title}</h4>
-        <p className="text-[14px] pt-1">
-         {product.desc}
-        </p>
+        <p className="text-[14px] pt-1">{product.desc}</p>
         <div className="flex justify-between items-center mt-4">
           <span>$ {product.prices[0]}</span>
-          <button className="btn btn-primary w-10 h-10 rounded-full !p-0 grid place-content-center">
+          <button
+            className="btn btn-primary w-10 h-10 rounded-full !p-0 grid place-content-center"
+            disabled={findCart}
+            onClick={handleClick}
+          >
             <FaShoppingBasket />
           </button>
         </div>
       </div>
     </div>
   );
-}
-export default MenuItem
+};
+export default MenuItem;

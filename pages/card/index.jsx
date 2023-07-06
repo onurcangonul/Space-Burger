@@ -52,57 +52,61 @@ const Card = ({ userList }) => {
           className="md:min-h-[calc(100vh_-_433px)] flex items-center flex-1 p-10
         overflow-x-auto w-full"
         >
-          <table className="w-full text-sm text-center text-gray-500 ">
-            <thead className="text-xs text-gray-400 uppercase bg-gray-700 min-w-[1000px] ">
-              <tr>
-                <th scope="col" className="py-3 px-6">
-                  Product
-                </th>
-                <th scope="col" className="py-3 px-6">
-                  Extras
-                </th>
-                <th scope="col" className="py-3 px-6">
-                  Price
-                </th>
-                <th scope="col" className="py-3 px-6">
-                  Quantity
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.products.map((product, index) => (
-                <tr
-                  key={index}
-                  className=" bg-secondary border-gray-700 hover:bg-primary transition-all"
-                >
-                  <td
-                    className="py-4 px-6 font-medium whitespace-nowrap
-                 hover:text-white flex items-center gap-x-1 justify-center"
-                  >
-                    <Image
-                      src={product.image}
-                      alt="product-card-image"
-                      width={50}
-                      height={50}
-                      style={{ objectFit: "contain" }}
-                    />
-                    <span>{product.name}</span>
-                  </td>
-                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                    {product.extras.map((item) => (
-                      <span key={item.id}>{item.text},</span>
-                    ))}
-                  </td>
-                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                    ${product.price}
-                  </td>
-                  <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                    {product.quantity}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="max-h-52 overflow-auto w-full">
+            {cart?.products?.length > 0 ? (
+              <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
+                <thead className="text-xs text-gray-400 uppercase bg-gray-700">
+                  <tr>
+                    <th scope="col" className="py-3 px-6">
+                      PRODUCT
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      EXTRAS
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      PRICE
+                    </th>
+                    <th scope="col" className="py-3 px-6">
+                      QUANTITY
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cart.products.map((product, index) => (
+                    <tr
+                      className="transition-all bg-secondary border-gray-700 hover:bg-primary"
+                      key={index}
+                    >
+                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center">
+                        <Image
+                          src={product?.image}
+                          alt=""
+                          width={50}
+                          height={50}
+                        />
+                        <span>{product.name}</span>
+                      </td>
+                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                        {product.extras?.length > 0
+                          ? product.extras.map((item) => (
+                              <span key={item.id}>{item.text}, </span>
+                            ))
+                          : "empty"}
+                      </td>
+                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                        ${product.price}
+                      </td>
+                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                        {product.quantity}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p className="text-center font-semibold">Your Cart Is Empty</p>
+            )}
+          </div>
         </div>
         <div className="bg-white min-h-[calc(100vh_-_433px)] flex flex-col justify-center text-secondary p-12 md:w-auto w-full">
           <Title addClass="text-[40px] md:text-start !text-center ">

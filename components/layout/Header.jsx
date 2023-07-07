@@ -15,8 +15,8 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   return (
     <div
-      className={`h-[5.5rem] z-40 relative ${
-        router.asPath === "/" ? "bg-transparent" : "bg-secondary"
+      className={`h-[5.5rem] z-50 relative w-full ${
+        router.asPath === "/" ? "bg-transparent" : "bg-secondary !fixed"
       }`}
     >
       <div
@@ -31,41 +31,73 @@ const Header = () => {
                 sm:w-auto sm:h-auto w-full h-screen
                 sm:text-white text-black
                 sm:bg-transparent bg-white
-                sm:flex hidden
+                sm:flex hidden 
                 ${isMenuModal === true && "!grid place-content-center"}`}
         >
           <ul className="flex gap-2 sm:flex-row flex-col items-center">
-            <li className="px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer">
+            <li
+              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
+                router.asPath === "/" && "text-primary"
+              }`}
+              onClick={() => setMenuModal(false)}
+            >
               <Link href="/">Home</Link>
             </li>
-            <li className="px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer">
+            <li
+              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
+                router.asPath === "/menu" && "text-primary"
+              }`}
+              onClick={() => setMenuModal(false)}
+            >
               <Link href="/menu">Menu</Link>
             </li>
-            <li className="px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer">
+            <li
+              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
+                router.asPath === "/about" && "text-primary"
+              }`}
+              onClick={() => setMenuModal(false)}
+            >
               <Link href="/about">About</Link>
             </li>
-            <li className="px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer">
+            <li
+              className={`px-[5px] py-[10px] uppercase hover:text-primary cursor-pointer ${
+                router.asPath === "/reservation" && "text-primary"
+              }`}
+              onClick={() => setMenuModal(false)}
+            >
               <Link href="/reservation">Book Table</Link>
             </li>
           </ul>
         </nav>
         <div className="flex gap-x-4 items-center">
           <Link href="/auth/login">
-            <FaUserAlt className="hover:text-primary transition-all cursor-pointer" />
+            <FaUserAlt
+              className={`hover:text-primary transition-all cursor-pointer ${
+                (router.asPath === "/auth/login" ||
+                  router.asPath.includes("Profile")) &&
+                "text-primary"
+              }`}
+              size={18}
+            />
           </Link>
           <Link href="/card">
             <span className="relative">
-              <FaShoppingBasket className="hover:text-primary transition-all" />
+              <FaShoppingBasket
+                className={`hover:text-primary transition-all ${
+                  router.asPath === "/card" && "text-primary"
+                }`}
+                size={18}
+              />
               <span
                 className="h-4 w-4 text-sm font-bold text-black grid place-content-center rounded-full
-                 bg-primary absolute -top-2 -right-3"
+                 bg-primary absolute -top-2 -right-3 "
               >
                 {cart.products.length === 0 ? "0" : cart.products.length}
               </span>
             </span>
           </Link>
           <button onClick={() => setIsSearchModal(true)}>
-            <FaSearch className="hover:text-primary transition-all" />
+            <FaSearch className="hover:text-primary transition-all" size={18} />
           </button>
           <a href="#" className="md:inline-block hidden sm ">
             <button className="btn-primary">Order Online</button>
@@ -78,7 +110,7 @@ const Header = () => {
           </button>
           {isMenuModal && (
             <button
-              className="absolute top-4 right-4 "
+              className="absolute top-4 right-4 md:hidden visible "
               onClick={() => setMenuModal(false)}
             >
               <MdClose

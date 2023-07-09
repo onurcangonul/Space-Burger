@@ -15,7 +15,7 @@ const Header = () => {
   const cart = useSelector((state) => state.cart);
   return (
     <div
-      className={`h-[5.5rem] z-50 relative w-full ${
+      className={`h-[6.5rem] z-50 relative w-full ${
         router.asPath === "/" ? "bg-transparent" : "bg-secondary !fixed"
       }`}
     >

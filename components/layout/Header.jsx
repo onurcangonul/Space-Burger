@@ -74,7 +74,7 @@ const Header = () => {
             <FaUserAlt
               className={`hover:text-primary transition-all cursor-pointer ${
                 (router.asPath === "/auth/login" ||
-                  router.asPath.includes("Profile")) &&
+                  router.asPath.includes("Profile") || router.asPath.includes("profile")) &&
                 "text-primary"
               }`}
               size={18}

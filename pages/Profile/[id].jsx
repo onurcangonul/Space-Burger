@@ -36,7 +36,7 @@ const Profile = ({ user }) => {
         </div>
         <ul className="font-semibold">
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0 w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 0 && "bg-primary text-white"
            }`}
@@ -46,7 +46,7 @@ const Profile = ({ user }) => {
             <button className="ml-2">Account</button>
           </li>
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0 w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 1 && "bg-primary text-white"
            }`}
@@ -56,7 +56,7 @@ const Profile = ({ user }) => {
             <button className="ml-2">Password</button>
           </li>
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0 w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 2 && "bg-primary text-white"
            }`}
@@ -65,7 +65,10 @@ const Profile = ({ user }) => {
             <i className="fa fa-motorcycle"></i>
             <button className="ml-1">Orders</button>
           </li>
-          <li className={`border w-full p-2 cur`} onClick={handleSignOut}>
+          <li
+            className={`border border-t-0 w-full p-2 cur`}
+            onClick={handleSignOut}
+          >
             <i className="fa fa-sign-out"></i>
             <button className="ml-2">Exit</button>
           </li>

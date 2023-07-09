@@ -43,7 +43,7 @@ const AdminProfile = () => {
         </div>
         <ul className="font-semibold">
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0 w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 0 && "bg-primary text-white"
            }`}
@@ -53,7 +53,7 @@ const AdminProfile = () => {
             <button className="ml-2">Products</button>
           </li>
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0  w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 1 && "bg-primary text-white"
            }`}
@@ -63,7 +63,7 @@ const AdminProfile = () => {
             <button className="ml-1">Orders</button>
           </li>
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0  w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 2 && "bg-primary text-white"
            }`}
@@ -73,7 +73,7 @@ const AdminProfile = () => {
             <button className="ml-1">Categories</button>
           </li>
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0  w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 3 && "bg-primary text-white"
            }`}
@@ -83,7 +83,7 @@ const AdminProfile = () => {
             <button className="ml-1">Footer</button>
           </li>
           <li
-            className={`border w-full p-2 cursor-pointer hover:bg-primary
+            className={`border border-t-0  w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
              tabs === 4 && "bg-primary text-white"
            }`}
@@ -99,7 +99,10 @@ const AdminProfile = () => {
       {tabs === 2 && <Category />}
       {tabs === 3 && <AdminFooter />}
       {isProductModal && <AddProduct setIsProductModal={setIsProductModal} />}
-      <button className="btn-primary w-12 h-12 !p-0 text-4xl absolute bottom-14 right-10 " onClick={()=> setIsProductModal(true)}>
+      <button
+        className="btn-primary w-12 h-12 !p-0 text-4xl absolute bottom-14 right-10 "
+        onClick={() => setIsProductModal(true)}
+      >
         +
       </button>
     </div>

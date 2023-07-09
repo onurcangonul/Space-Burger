@@ -7,7 +7,9 @@ export default function Index({ categoryList,productList }) {
   return (
     <div>
       <Head>
-        <title>Create Next App</title>
+        <title>
+          Space Burger - A Taste Journey in Space
+        </title>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       </Head>

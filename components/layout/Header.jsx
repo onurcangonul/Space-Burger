@@ -80,17 +80,17 @@ const Header = () => {
               size={18}
             />
           </Link>
-          <Link href="/card">
+          <Link href="/cart">
             <span className="relative">
               <FaShoppingBasket
                 className={`hover:text-primary transition-all ${
-                  router.asPath === "/card" && "text-primary"
+                  router.asPath === "/cart" && "text-primary"
                 }`}
                 size={18}
               />
               <span
                 className="h-4 w-4 text-sm font-bold text-black grid place-content-center rounded-full
-                 bg-primary absolute -top-2 -right-3 "
+                 bg-primary absolute !-top-2 -right-3 "
               >
                 {cart.products.length === 0 ? "0" : cart.products.length}
               </span>
@@ -99,9 +99,9 @@ const Header = () => {
           <button onClick={() => setIsSearchModal(true)}>
             <FaSearch className="hover:text-primary transition-all" size={18} />
           </button>
-          <a href="#" className="md:inline-block hidden sm ">
+          {/* <a href="#" className="md:inline-block hidden sm ">
             <button className="btn-primary">Order Online</button>
-          </a>
+          </a> */}
           <button
             className="sm:hidden inline-block"
             onClick={() => setMenuModal(true)}

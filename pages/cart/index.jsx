@@ -20,31 +20,28 @@ const Card = ({ userList }) => {
     
   };
 
-   const createOrder = async () => {
-     try {
-       if (session) {
-         if (confirm("Are you sure to order?")) {
-           const res = await axios.post(
-             `${process.env.NEXT_PUBLIC_API_URL}/orders`,
-             newOrder
-           );
-           if (res.status === 201) {
-             router.push(`/order/${res.data._id}`);
-             dispatch(reset());
-             toast.success("Order created successfully", {
-               autoClose: 1000,
-             });
-           }
+ const createOrder = async () => {
+   try {
+     if (session) {
+       if (confirm("Are you sure to order?")) {
+         const res = await axios.post(
+           `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+           newOrder
+         );
+         if (res.status === 201) {
+           dispatch(reset());
+           toast.success("Order created successfully");
+           router.push(`/order/${res.data._id}`);
          }
-       } else {
-         toast.error("Please login first.", {
-           autoClose: 1000,
-         });
        }
-     } catch (err) {
-       console.log(err);
+     } else {
+       toast.error("Please login first.",);
      }
-   };
+   } catch (err) {
+     console.log(err);
+   }
+  };
+  
   return (
     <div className="min-h-[calc(100vh_-_433px)]">
       <div className="flex justify-between items-center md:flex-row flex-col">
@@ -110,7 +107,7 @@ const Card = ({ userList }) => {
         </div>
         <div className="bg-white min-h-[calc(100vh_-_433px)] flex flex-col justify-center text-secondary p-12 md:w-auto w-full">
           <Title addClass="text-[40px] md:text-start !text-center ">
-            Card Total
+            Cart Total
           </Title>
           <div className="mt-6">
             <strong>Subtotal: </strong>${cart.total} <br />

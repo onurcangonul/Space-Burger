@@ -53,7 +53,7 @@ const Index = ({ food }) => {
           priority
         />
       </div>
-      <div className="md:flex-1 md:text-start text-center">
+      <div className="md:flex-1 md:text-start text-center mx-auto">
         <Title addClass="text-6xl">{food.title}</Title>
         <span className="text-primary text-2xl font-bold  underline-offset-1 my-4 inline-block">
           ${price}
@@ -68,14 +68,15 @@ const Index = ({ food }) => {
                   className="relative w-8 h-8 cursor-pointer"
                   onClick={() => handleSize(0)}
                 >
-                  <Image
-                    src="/images/size.png"
-                    alt=""
-                    fill
-                    style={{ objectFit: "contain" }}
-                    priority
-                  />
-                  <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium">
+                    <Image
+                      src="/images/size.png"
+                      alt=""
+                      fill
+                      style={{ objectFit: "contain" }}
+                      priority
+                      // className="active:border-2 border-primary rounded-full "
+                    />
+                  <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium bg-red">
                     Small
                   </span>
                 </div>
@@ -130,7 +131,7 @@ const Index = ({ food }) => {
           onClick={handleClick}
           disabled={findCart}
         >
-          Add To Card
+          Add To Cart
         </button>
       </div>
     </div>

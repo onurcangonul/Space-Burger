@@ -5,6 +5,8 @@ import { reset } from "@/redux/cartSlice";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useRouter } from "next/router";
 const Card = ({ userList }) => {
   const { data: session } = useSession();

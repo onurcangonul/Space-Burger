@@ -4,13 +4,16 @@ import { FaShoppingBasket } from "react-icons/fa";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { addProduct } from "@/redux/cartSlice";
-addProduct;
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const MenuItem = ({ product }) => {
   const cart = useSelector((state) => state.cart);
   const findCart = cart.products.find((item) => item._id === product._id);
   const dispatch = useDispatch();
 
   const handleClick = () => {
+    
     dispatch(
       addProduct({
         ...product,
@@ -19,6 +22,7 @@ const MenuItem = ({ product }) => {
         quantity: 1,
       })
     );
+       toast.success("Product Added To Cart");
   };
   return (
     <div className="bg-secondary rounded-3xl">

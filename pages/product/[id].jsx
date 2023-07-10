@@ -4,6 +4,8 @@ import { useState } from "react";
 import { addProduct } from "@/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Index = ({ food }) => {
   const [prices, setPrices] = useState(food.prices);
@@ -39,7 +41,8 @@ const Index = ({ food }) => {
   };
 
   const handleClick = () => {
-    dispatch(addProduct({...food, extras,price,quantity:1}))
+    dispatch(addProduct({ ...food, extras, price, quantity: 1 }))
+    toast.success("Product Added To Cart");
   };
 
   return (

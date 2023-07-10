@@ -109,14 +109,14 @@ const Card = ({ userList }) => {
           <Title addClass="text-[40px] md:text-start !text-center ">
             Cart Total
           </Title>
-          <div className="mt-6">
+          <div className="mt-6 mx-auto">
             <strong>Subtotal: </strong>${cart.total} <br />
             <strong className="inline-block my-1">Discount: </strong>$0.00
             <br />
             <strong>Total: </strong>${cart.total}
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col mx-auto">
             <button
               className="btn-primary mt-4 md:w-auto w-52"
               onClick={createOrder}

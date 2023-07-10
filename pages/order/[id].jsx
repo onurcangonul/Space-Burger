@@ -1,6 +1,7 @@
 import axios from "axios";
 import Image from "next/image";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Order = ({ order }) => {
   const status = order?.status
   const statusClass = (index) => {

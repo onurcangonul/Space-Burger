@@ -47,7 +47,7 @@ const Index = ({ food }) => {
 
   return (
     <div className="flex items-center md:h-[calc(100vh_-_88px)] gap-5 py-20 flex-wrap ">
-      <div className="relative md:flex-1 md:w-[80%] md:h-[80%] w-44 h-44 mx-auto md:mt-0 mt-12">
+      <div className="relative md:flex-1 md:w-[80%] md:h-[80%] w-44 h-44 mx-auto ">
         <Image
           src={food?.image}
           alt=""

@@ -121,7 +121,7 @@ const Index = ({ food }) => {
             </>
           )}
         </div>
-        <div className="flex gap-x-4 my-6 md:justify-start justify-center">
+        <div className="flex gap-x-4 my-6 md:justify-start justify-center md:flex grid md:gap-y-0 gap-y-3">
           {extraItems.map((item) => (
             <label key={item._id} className="flex items-center gap-x-2">
               <input

@@ -46,9 +46,8 @@ const Index = ({ food }) => {
   };
 
   return (
-    
     <div className="flex items-center md:h-[calc(100vh_-_88px)] gap-5 py-20 flex-wrap ">
-      <div className="relative md:flex-1 md:w-[80%] md:h-[80%] w-44 h-44 mx-auto">
+      <div className="relative md:flex-1 md:w-[80%] md:h-[80%] w-44 h-44 mx-auto md:mt-0 mt-12">
         <Image
           src={food?.image}
           alt=""
@@ -57,7 +56,7 @@ const Index = ({ food }) => {
           priority
         />
       </div>
-      <div className="md:flex-1 md:text-start text-center mx-auto">
+      <div className="md:flex-1 md:text-start text-center mx-auto ">
         <Title addClass="text-6xl">{food.title}</Title>
         <span className="text-primary text-2xl font-bold  underline-offset-1 my-4 inline-block">
           ${price}

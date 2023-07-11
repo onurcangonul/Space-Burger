@@ -46,6 +46,7 @@ const Index = ({ food }) => {
   };
 
   return (
+    
     <div className="flex items-center md:h-[calc(100vh_-_88px)] gap-5 py-20 flex-wrap ">
       <div className="relative md:flex-1 md:w-[80%] md:h-[80%] w-44 h-44 mx-auto">
         <Image
@@ -61,7 +62,10 @@ const Index = ({ food }) => {
         <span className="text-primary text-2xl font-bold  underline-offset-1 my-4 inline-block">
           ${price}
         </span>
-        <p className="text-sm my-4 md:pr-24">{food?.desc}</p>
+        {(food.category === "burger" || food.category === "pizza") && (
+          <h1 className="text-2xl font-bold">Ingredients:</h1>
+        )}
+        <h1 className="md:text-xl text-sm my-4 md:pr-24">{food?.desc}</h1>
         <div>
           {food.category === "pizza" && (
             <>
@@ -71,14 +75,14 @@ const Index = ({ food }) => {
                   className="relative w-8 h-8 cursor-pointer"
                   onClick={() => handleSize(0)}
                 >
-                    <Image
-                      src="/images/size.png"
-                      alt=""
-                      fill
-                      style={{ objectFit: "contain" }}
-                      priority
-                      // className="active:border-2 border-primary rounded-full "
-                    />
+                  <Image
+                    src="/images/size.png"
+                    alt=""
+                    fill
+                    style={{ objectFit: "contain" }}
+                    priority
+                    // className="active:border-2 border-primary rounded-full "
+                  />
                   <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium bg-red">
                     Small
                   </span>

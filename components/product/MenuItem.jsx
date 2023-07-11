@@ -43,7 +43,7 @@ const MenuItem = ({ product }) => {
       </div>
       <div className="p-[25px] text-white">
         <h4 className="text-xl font-semibold">{product.title}</h4>
-        <p className="text-[14px] pt-1">{product.desc}</p>
+        <p className="text-[13px] pt-1">{product.desc}</p>
         <div className="flex justify-between items-center mt-4">
           <span>$ {product.prices[0]}</span>
           <button

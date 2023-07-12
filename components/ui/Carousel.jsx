@@ -24,7 +24,7 @@ const Carousel = () => {
     };
 
     return (
-      <div className="md:h-[630px] h-[750px] w-full  -mt-[95px]">
+      <div className="md:h-screen h-[720px] w-full  -mt-[95px]">
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="relative h-full w-full">
             <Image

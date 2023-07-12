@@ -6,139 +6,138 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { useRouter } from "next/router";
-const Card = ({ userList }) => {
-  const { data: session } = useSession();
-  const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const user = userList?.find((user) => user.email === session?.user?.email);
-  const newOrder = {
-    customer: user?.fullName,
-    address: user?.address ? user?.address : "No Address",
-    total: cart.total,
-    method: 0,
-    
-  };
 
- const createOrder = async () => {
-   try {
-     if (session) {
-       if (confirm("Are you sure to order?")) {
-         const res = await axios.post(
-           `${process.env.NEXT_PUBLIC_API_URL}/orders`,
-           newOrder
-         );
-         if (res.status === 201) {
-           dispatch(reset());
-           toast.success("Order created successfully");
-           router.push(`/order/${res.data._id}`);
+
+const Carts = ({ userList }) => {
+     const { data: session } = useSession();
+     const cart = useSelector((state) => state.cart);
+     const dispatch = useDispatch();
+     const router = useRouter();
+     const user = userList?.find((user) => user.email === session?.user?.email);
+     const newOrder = {
+       customer: user?.fullName,
+       address: user?.address ? user?.address : "No Address",
+       total: cart.total,
+       method: 0,
+    };
+    console.log(cart)
+
+     const createOrder = async () => {
+       try {
+         if (session) {
+           if (confirm("Are you sure to order?")) {
+             const res = await axios.post(
+               `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+               newOrder
+             );
+             if (res.status === 201) {
+               dispatch(reset());
+               toast.success("Order created successfully");
+               router.push(`/order/${res.data._id}`);
+             }
+           }
+         } else {
+           toast.error("Please login first.");
          }
+       } catch (err) {
+         console.log(err);
        }
-     } else {
-       toast.error("Please login first.",);
-     }
-   } catch (err) {
-     console.log(err);
-   }
-  };
-  
-  return (
-    <div className="min-h-[calc(100vh_-_433px)]">
-      <div className="flex justify-between items-center md:flex-row flex-col">
-        <div
-          className="md:min-h-[calc(100vh_-_433px)] flex items-center flex-1 p-10
-        overflow-x-auto w-full"
-        >
-          <div className="max-h-52 overflow-auto w-full">
-            {cart?.products?.length > 0 ? (
-              <table className="w-full text-sm text-center text-gray-500 min-w-[1000px]">
-                <thead className="text-xs text-gray-400 uppercase bg-gray-700">
-                  <tr>
-                    <th scope="col" className="py-3 px-6">
-                      PRODUCT
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                      EXTRAS
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                      PRICE
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                      QUANTITY
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart.products.map((product, index) => (
-                    <tr
-                      className="transition-all bg-secondary border-gray-700 hover:bg-primary"
-                      key={index}
-                    >
-                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center">
-                        <Image
-                          src={product?.image}
-                          alt=""
-                          width={50}
-                          height={50}
-                        />
-                        <span>{product.name}</span>
-                      </td>
-                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                        {product.extras?.length > 0
-                          ? product.extras.map((item) => (
-                              <span key={item.id}>{item.text}, </span>
-                            ))
-                          : "empty"}
-                      </td>
-                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                        ${product.price}
-                      </td>
-                      <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                        {product.quantity}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <p className="text-center font-semibold">Your Cart Is Empty</p>
-            )}
-          </div>
-        </div>
-        <div className="bg-white min-h-[calc(100vh_-_433px)] flex flex-col justify-center text-secondary p-12 md:w-auto w-full">
-          <Title addClass="text-[40px] md:text-start !text-center ">
-            Cart Total
-          </Title>
-          <div className="mt-6 mx-auto">
-            <strong>Subtotal: </strong>${cart.total} <br />
-            <strong className="inline-block my-1">Discount: </strong>$0.00
-            <br />
-            <strong>Total: </strong>${cart.total}
-          </div>
+     };
+    return (
+      <>
+        {cart?.products?.length > 0 ? (
+          <div className="h-screen bg-gray-100 pt-20">
+            <h1 className="mb-10 text-center text-2xl font-bold">Cart Items</h1>
+            <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+              <div className="rounded-lg md:w-2/3">
+                {cart.products.map((product, index) => (
+                  <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+                    <Image
+                      src={product?.image}
+                      alt=""
+                      width={300}
+                      height={300}
+                      className="w-full rounded-lg sm:w-40"
+                    />
 
-          <div className="flex flex-col mx-auto">
-            <button
-              className="btn-primary mt-4 md:w-auto w-52"
-              onClick={createOrder}
-            >
-              Checkout Now
-            </button>
-            <button
-              className="btn-primary !bg-danger mt-4 md:w-auto w-52"
-              onClick={() => dispatch(reset())}
-            >
-              Clear Cart
-            </button>
+                    <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+                      <div className="mt-5 sm:mt-0">
+                        <h2 className="text-xl font-bold text-gray-900">
+                          {product?.title}
+                        </h2>
+                        <h2 className="text-lg font-semibold mt-2">Extra</h2>
+                        <p className=" text-xs text-gray-700">
+                          {product?.desc}
+                        </p>
+                        <p className=" mt-4 text-xl font-bold">
+                          Price: ${product?.price}
+                        </p>
+                      </div>
+
+                      <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
+                        <div className="flex items-center border-gray-100">
+                          <span className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">
+                            {" "}
+                            -{" "}
+                          </span>
+                          <input
+                            className="h-8 w-8 border bg-white text-center text-xs outline-none"
+                            type="number"
+                            value={product?.quantity}
+                            min="1"
+                          />
+                          <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50">
+                            {" "}
+                            +{" "}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+                <div className="mb-2 flex justify-between">
+                  <p className="text-gray-700">Subtotal</p>
+                  <p className="text-gray-700">$ {cart.total}</p>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-gray-700">Shipping</p>
+                  <p className="text-gray-700">FREE</p>
+                </div>
+                <hr className="my-4" />
+                <div className="flex justify-between">
+                  <p className="text-lg font-bold">Total</p>
+                  <div className="">
+                    <p className="mb-1 text-lg font-bold">$ {cart.total} USD</p>
+                  </div>
+                </div>
+                <button
+                  onClick={createOrder}
+                  className="mt-6 w-full rounded-md btn-primary py-1.5 font-medium text-blue-50 hover:bg-amber-600"
+                >
+                  Check out
+                </button>
+                <button
+                  onClick={() => dispatch(reset())}
+                  className="mt-6 w-full rounded-md btn-primary !bg-danger py-1.5 font-medium text-blue-50 hover:bg-amber-600"
+                >
+                  Clear Cart
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  );
+        ) : (
+          <div className="flex flex-col h-screen justify-center items-center">
+            <h2 className="font-semibold">Your Cart Is Empty</h2>
+          </div>
+        )}
+      </>
+    );
 };
 
-export default Card;
+export default Carts;
 
 export const getServerSideProps = async () => {
   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);

@@ -3,11 +3,20 @@ import Input from "../form/Input";
 import Title from "./Title";
 import { useFormik } from 'formik';
 import { reservationSchena } from "@/schema/reservation";
+import axios from "axios";
+import { toast } from "react-toastify";
+toast
 const Reservation = () => {
-  const onSubmit = async (values,actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-    actions.resetForm()
-}
+ const onSubmit = async (values, actions) => {
+   try {
+     await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/reservation`, values);
+     actions.resetForm();
+    toast.success("Your reservation has been made successfully.");
+   } catch (error) {
+     console.error(error);
+   }
+   console.log(values)
+ };
 
   const {values,errors, touched, handleChange,handleSubmit, handleBlur} = useFormik({
     initialValues: {

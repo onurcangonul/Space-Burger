@@ -5,12 +5,11 @@ const Logo = () => {
   return (
     <Link href="/" className="cursor-pointer">
       <Image
-        src="/images/space-buger-logo.webp"
-        alt="space-buger-logo"
-        width={80}
-        height={80}
-        className="mt-2"
-        
+        src="/images/space-burger-logo.webp"
+        alt="space-burger-logo"
+        width={96}
+        height={96}
+        className="mt-2 "
       />
     </Link>
   );

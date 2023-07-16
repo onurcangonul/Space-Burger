@@ -3,6 +3,7 @@ import { useState,useEffect } from "react";
 import Account from "@/components/profile/Account";
 import Password from "@/components/profile/Password";
 import Order from "@/components/profile/Order";
+import Reservation from "@/components/profile/Reservation";
 import { signOut, getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -65,6 +66,16 @@ const Profile = ({ user }) => {
             <i className="fa fa-motorcycle"></i>
             <button className="ml-1">Orders</button>
           </li>
+          {/* <li
+            className={`border border-t-0 w-full p-2 cursor-pointer hover:bg-primary
+           hover:text-white transition-all ${
+             tabs === 2 && "bg-primary text-white"
+           }`}
+            onClick={() => setTabs(3)}
+          >
+            <i className="fa fa-calendar"></i>
+            <button className="ml-1">Reservation</button>
+          </li> */}
           <li
             className={`border border-t-0 w-full p-2 cur`}
             onClick={handleSignOut}
@@ -77,6 +88,7 @@ const Profile = ({ user }) => {
       {tabs === 0 && <Account user={user} />}
       {tabs === 1 && <Password user={user} />}
       {tabs === 2 && <Order />}
+      {tabs === 3 && <Reservation user={user} />}
     </div>
   );
 };

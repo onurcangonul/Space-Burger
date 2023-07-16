@@ -4,7 +4,8 @@ import { profileSchena } from "@/schema/profile";
 import { useFormik } from "formik";
 import axios from "axios";
 import { toast } from "react-toastify";
-const Account = ({user}) => {
+const Account = ({ user }) => {
+
   const onSubmit = async (values, actions) => {
     try {
       const res = await axios.put(

@@ -100,7 +100,7 @@ const AdminProfile = () => {
       {tabs === 3 && <AdminFooter />}
       {isProductModal && <AddProduct setIsProductModal={setIsProductModal} />}
       <button
-        className="btn-primary w-12 h-12 !p-0 text-4xl absolute bottom-14 right-10 "
+        className="btn-primary w-12 h-12 !p-0 text-4xl fixed bottom-14 right-5 "
         onClick={() => setIsProductModal(true)}
       >
         +

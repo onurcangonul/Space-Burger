@@ -34,6 +34,7 @@ const Order = () => {
       console.log(err);
     }
   };
+  console.log(orders)
 
   return (
     <div className="lg:p-8 flex-1 lg:mt-0 mt-5">
@@ -43,7 +44,7 @@ const Order = () => {
           <thead className="text-xs text-gray-400 uppercase bg-gray-700 min-w-[1000px] ">
             <tr>
               <th scope="col" className="py-3 px-6">
-                Product ID
+                Product
               </th>
               <th scope="col" className="py-3 px-6">
                 Customer
@@ -74,7 +75,7 @@ const Order = () => {
                   className="py-4 px-6 font-medium whitespace-nowrap
                  hover:text-white gap-x-1 "
                 >
-                  Pizza
+                  {order?.itemTitle}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                   <span>{order?.customer}</span>

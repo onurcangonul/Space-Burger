@@ -47,7 +47,7 @@ console.log(orders);
           <thead className="text-xs text-gray-400 uppercase bg-gray-700">
             <tr>
               <th scope="col" className="py-3 px-6">
-                Customer
+                Order Name
               </th>
               <th scope="col" className="py-3 px-6">
                 Address
@@ -73,16 +73,16 @@ console.log(orders);
                   className="py-4 px-6 font-medium whitespace-nowrap
                  hover:text-white flex items-center gap-x-1 justify-center"
                 >
-                  <span>{order.customer}</span>
-                </td>
-                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
-                  <span>İstanbul</span>
+                  <span>{order.itemTitle}</span>
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                   {order.address}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                   {order.createdAt}
+                </td>
+                <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
+                  $ {order.total}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white">
                   <span>{status[order?.status]}</span>

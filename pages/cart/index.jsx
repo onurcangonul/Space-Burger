@@ -14,14 +14,16 @@ const Carts = ({ userList }) => {
      const cart = useSelector((state) => state.cart);
      const dispatch = useDispatch();
      const router = useRouter();
-     const user = userList?.find((user) => user.email === session?.user?.email);
+  const user = userList?.find((user) => user.email === session?.user?.email);
+  const itemTitles = cart.products.map((product) => product.title);
      const newOrder = {
        customer: user?.fullName,
        address: user?.address ? user?.address : "No Address",
        total: cart.total,
        method: 0,
-    };
-    console.log(cart)
+       itemTitle: itemTitles[0]
+     };
+    console.log(user);
 
      const createOrder = async () => {
        try {

@@ -12,6 +12,11 @@ const OrderSchema = new mongoose.Schema(
             required: true,
             maxlength: 200,
         },
+        itemTitle: {
+            type: String,
+            required: true,
+            maxlength: 200,
+        },
         total: {
             type: Number,
             required: true,

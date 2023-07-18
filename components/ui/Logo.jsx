@@ -7,8 +7,8 @@ const Logo = () => {
       <Image
         src="/images/space-burger-logo.webp"
         alt="space-burger-logo"
-        width={96}
-        height={96}
+        width={85}
+        height={85}
         className="mt-2 "
       />
     </Link>

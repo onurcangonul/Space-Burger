@@ -97,14 +97,14 @@ const Login = () => {
           <button className="btn-primary" type="submit">
             Login
           </button>
-          <button
+          {/* <button
             className="btn-primary !bg-secondary"
             type="button"
             onClick={() => signIn("github")}
           >
             <i className="fab fa-github mr-2" aria-hidden="true"></i>
             Github
-          </button>
+          </button> */}
           <Link href="/auth/register">
             <span className="grid place-content-center text-sm underline">
               Do you no have a account?

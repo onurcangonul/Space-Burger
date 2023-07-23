@@ -4,6 +4,7 @@ import Products from "@/components/admin/Products";
 import Order from "@/components/admin/Order";
 import Category from "@/components/admin/Category";
 import AdminFooter from "@/components/admin/Footer";
+import Reservations from "@/components/admin/Reservations";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
@@ -70,7 +71,7 @@ const AdminProfile = () => {
             onClick={() => setTabs(2)}
           >
             <i className="fa fa-th-large"></i>
-            <button className="ml-1">Categories</button>
+            <button className="ml-1">Reservations</button>
           </li>
           <li
             className={`border border-t-0  w-full p-2 cursor-pointer hover:bg-primary
@@ -79,13 +80,23 @@ const AdminProfile = () => {
            }`}
             onClick={() => setTabs(3)}
           >
+            <i className="fa fa-th-large"></i>
+            <button className="ml-1">Categories</button>
+          </li>
+          <li
+            className={`border border-t-0  w-full p-2 cursor-pointer hover:bg-primary
+           hover:text-white transition-all ${
+             tabs === 4 && "bg-primary text-white"
+           }`}
+            onClick={() => setTabs(4)}
+          >
             <i className="fa fa-window-maximize"></i>
             <button className="ml-1">Footer</button>
           </li>
           <li
             className={`border border-t-0  w-full p-2 cursor-pointer hover:bg-primary
            hover:text-white transition-all ${
-             tabs === 4 && "bg-primary text-white"
+             tabs === 5 && "bg-primary text-white"
            }`}
             onClick={closeAdminAccount}
           >
@@ -96,8 +107,9 @@ const AdminProfile = () => {
       </div>
       {tabs === 0 && <Products />}
       {tabs === 1 && <Order />}
-      {tabs === 2 && <Category />}
-      {tabs === 3 && <AdminFooter />}
+      {tabs === 2 && <Reservations />}
+      {tabs === 3 && <Category />}
+      {tabs === 4 && <AdminFooter />}
       {isProductModal && <AddProduct setIsProductModal={setIsProductModal} />}
       <button
         className="btn-primary w-12 h-12 !p-0 text-4xl fixed bottom-14 right-5 "
